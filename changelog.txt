@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.2
+Date: 11.10.2025
+  Fixes:
+    - Added melting crafting category back to chemical plant when using space exploration
+    - Added crafting-or-electromagnetics crafting category back to assembling machine 3 when using space exploration
+  Compatibility:
+    - Krastorio2 by raiguard
+---------------------------------------------------------------------------------------------------
 Version: 1.1.1
 Date: 26.09.2025
   Fixes:

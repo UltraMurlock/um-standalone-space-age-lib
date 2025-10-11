@@ -1,5 +1,12 @@
 local prefix = "se-"
 local gr = "-grounded"
+
+--adding melting back to chemical plant
+local chemplant = data.raw["assembling-machine"]["chemical-plant"]
+if chemplant then
+	table.insert(chemplant.crafting_categories, "melting")
+end
+
 --adding SA crafting catagories to the SE biochem
 local biochem_categories_to_add = {
 	"chemistry",
@@ -29,6 +36,12 @@ if biomachinegr then
 	for _, category_name in ipairs(biochem_categories_to_add) do
 		table.insert(biomachinegr.crafting_categories, category_name)
 	end
+end
+
+--adding crafting-or-electromagnetics back to assembling machine 3
+local asmachine3 = data.raw["assembling-machine"]["assembling-machine-3"]
+if asmachine3 then
+	table.insert(asmachine3.crafting_categories, "crafting-or-electromagnetics")
 end
 
 -- adding SA crafting catagories to the SE space assember and manufactory

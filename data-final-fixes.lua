@@ -13,3 +13,7 @@ end
 if mods["modules-t4"] then
     require("compatibility-scripts.modules-t4")
 end
+
+if mods["Krastorio2"] then
+    require("compatibility-scripts.Krastorio2")
+end

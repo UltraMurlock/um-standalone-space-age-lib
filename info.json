@@ -1,6 +1,6 @@
 {
   "name": "um-standalone-space-age-lib",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "UltraMurlock",
   "title": "Standalone Space Age Library",
   "description": "A library required by some other standalone mods.",
@@ -9,6 +9,7 @@
     "?quality",
     "?TurboBelt",
     "?space-exploration",
+    "?Krastorio2",
     "?modules-t4"
   ],
   "factorio_version": "2.0",
