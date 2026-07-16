@@ -33,7 +33,6 @@ end
 
 -- adding SA crafting catagories to the SE space assember and manufactory
 local manufact_categories_to_add = {
-	"basic-crafting",
 	"crafting",
 	"advanced-crafting",
 	"crafting-with-fluid",
