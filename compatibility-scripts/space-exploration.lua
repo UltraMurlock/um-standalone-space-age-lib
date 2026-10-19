@@ -4,7 +4,7 @@ local gr = "-grounded"
 local biochem_categories_to_add = {
 	"chemistry",
 	"chemistry-or-cryogenics",
-	"organic-or-chemistry"
+	"organic-or-chemistry",
 }
 
 --	machine_map = {["space-manufactory"] = "assembling-machine",["space-assembling-machine"] = "assembling-machine",["biochemical-facility"] = "chemical-plant",}
@@ -16,15 +16,15 @@ local biochem_categories_to_add = {
 
 --this didn't work, my lua sucks, we ae just gonna list them, DEAL WITH IT
 --grounded biochem
-local biomachine = data.raw["assembling-machine"][prefix.. "space-biochemical-laboratory" .. gr]
+local biomachine = data.raw["assembling-machine"][prefix .. "space-biochemical-laboratory" .. gr]
 if biomachine then
 	for _, category_name in ipairs(biochem_categories_to_add) do
 		table.insert(biomachine.crafting_categories, category_name)
 	end
 end
 
---biochem	
-local biomachinegr = data.raw["assembling-machine"][prefix.. "space-biochemical-laboratory"]
+--biochem
+local biomachinegr = data.raw["assembling-machine"][prefix .. "space-biochemical-laboratory"]
 if biomachinegr then
 	for _, category_name in ipairs(biochem_categories_to_add) do
 		table.insert(biomachinegr.crafting_categories, category_name)
@@ -33,7 +33,6 @@ end
 
 -- adding SA crafting catagories to the SE space assember and manufactory
 local manufact_categories_to_add = {
-	"basic-crafting",
 	"crafting",
 	"advanced-crafting",
 	"crafting-with-fluid",
@@ -44,9 +43,9 @@ local manufact_categories_to_add = {
 	"organic-or-hand-crafting",
 	"organic-or-assembling",
 	"electronics-or-assembling",
-	"cryogenics-or-assembling"
- --   "crafting-with-fluid-or-metallurgy"
- -- metallurgy with fluid is SE metals done in casting????
+	"cryogenics-or-assembling",
+	--   "crafting-with-fluid-or-metallurgy"
+	-- metallurgy with fluid is SE metals done in casting????
 }
 
 --space assembler
@@ -84,17 +83,17 @@ end
 -- doing the same exact thging 6 times because I can't do a simple loop, yay.    it works :(
 -- add SE recipes listed below to the crafting new sa catagories
 function addRecipeToCategory(recipeName, categoryName)
-	if data.raw.recipe[recipeName]["additional_categories"] == nil then
-		data.raw.recipe[recipeName]["additional_categories"] = {categoryName}
+	local categories = data.raw.recipe[recipeName].categories
+	if not categories then
+		data.raw.recipe[recipeName].categories = { categoryName }
 	else
-		table.insert(data.raw.recipe[recipeName]["additional_categories"], categoryName)
+		table.insert(categories, categoryName)
 	end
 end
 
 --if the foundry mod is on add the SE recipes
 if mods["um-standalone-foundry"] then
-	recipesToAddToFoundry =
-	{
+	recipesToAddToFoundry = {
 		"se-molten-iron",
 		"se-iron-ingot",
 		"se-steel-ingot",
@@ -105,18 +104,17 @@ if mods["um-standalone-foundry"] then
 		"se-molten-holmium",
 		"se-holmium-ingot",
 		"se-iridium-blastcake",
-		"se-iridium-ingot"
+		"se-iridium-ingot",
 	}
 
-	for _,j in ipairs(recipesToAddToFoundry) do
-		addRecipeToCategory(j,"crafting-with-fluid-or-metallurgy")
+	for _, j in ipairs(recipesToAddToFoundry) do
+		addRecipeToCategory(j, "crafting-with-fluid-or-metallurgy")
 	end
 end
 
 --if the em mod is on add the se modules
 if mods["um-standalone-electromagnetic-plant"] then
-	recipesToAddToEMP =
-	{
+	recipesToAddToEMP = {
 		"electronic-circuit",
 		"electronic-circuit-wood",
 		"advanced-circuit",
@@ -149,18 +147,22 @@ if mods["um-standalone-electromagnetic-plant"] then
 		"efficiency-module-6",
 		"efficiency-module-7",
 		"efficiency-module-8",
-		"efficiency-module-9"
+		"efficiency-module-9",
 	}
 
-	for _,j in pairs(recipesToAddToEMP) do
-		addRecipeToCategory(j,"electromagnetics")
+	for _, j in pairs(recipesToAddToEMP) do
+		addRecipeToCategory(j, "electromagnetics")
 	end
-	
-	table.insert(data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories, "crafting-or-electromagnetics")
+
+	table.insert(
+		data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories,
+		"crafting-or-electromagnetics"
+	)
 	--adding crafting-or-electromagnetics to the em plant, the mod add it but.... doesn't no clue why
 end
 
 -- if the cryo mod is on give it the chem plants recipes
 if mods["um-standalone-cryogenic-plant"] then
-	data.raw["assembling-machine"]["cryogenic-plant"]["crafting_categories"] = data.raw["assembling-machine"]["chemical-plant"]["crafting_categories"]
+	data.raw["assembling-machine"]["cryogenic-plant"]["crafting_categories"] =
+		data.raw["assembling-machine"]["chemical-plant"]["crafting_categories"]
 end
