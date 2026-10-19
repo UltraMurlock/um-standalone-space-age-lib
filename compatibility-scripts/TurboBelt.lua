@@ -1,5 +1,5 @@
-data.raw.recipe["turbo-transport-belt"].categories = { "pressing" }
-data.raw.recipe["turbo-underground-belt"].categories = { "pressing" }
-data.raw.recipe["turbo-splitter"].categories = { "pressing" }
-data.raw.recipe["turbo-loader"].categories = { "pressing" }
+add_recipe_category(data.raw.recipe["turbo-transport-belt"], "metallurgy")
+add_recipe_category(data.raw.recipe["turbo-underground-belt"], "metallurgy")
+add_recipe_category(data.raw.recipe["turbo-splitter"], "metallurgy")
+add_recipe_category(data.raw.recipe["turbo-loader"], "metallurgy")
 
