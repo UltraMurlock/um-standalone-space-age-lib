@@ -3,8 +3,6 @@ local gr = "-grounded"
 --adding SA crafting catagories to the SE biochem
 local biochem_categories_to_add = {
 	"chemistry",
-	"chemistry-or-cryogenics",
-	"organic-or-chemistry",
 }
 
 --	machine_map = {["space-manufactory"] = "assembling-machine",["space-assembling-machine"] = "assembling-machine",["biochemical-facility"] = "chemical-plant",}
@@ -36,14 +34,6 @@ local manufact_categories_to_add = {
 	"crafting",
 	"advanced-crafting",
 	"crafting-with-fluid",
-	"electronics",
-	"electronics-with-fluid",
-	"pressing",
-	"metallurgy-or-assembling",
-	"organic-or-hand-crafting",
-	"organic-or-assembling",
-	"electronics-or-assembling",
-	"cryogenics-or-assembling",
 	--   "crafting-with-fluid-or-metallurgy"
 	-- metallurgy with fluid is SE metals done in casting????
 }
@@ -80,17 +70,6 @@ if mamachinegr then
 	end
 end
 
--- doing the same exact thging 6 times because I can't do a simple loop, yay.    it works :(
--- add SE recipes listed below to the crafting new sa catagories
-function addRecipeToCategory(recipeName, categoryName)
-	local categories = data.raw.recipe[recipeName].categories
-	if not categories then
-		data.raw.recipe[recipeName].categories = { categoryName }
-	else
-		table.insert(categories, categoryName)
-	end
-end
-
 --if the foundry mod is on add the SE recipes
 if mods["um-standalone-foundry"] then
 	recipesToAddToFoundry = {
@@ -108,7 +87,7 @@ if mods["um-standalone-foundry"] then
 	}
 
 	for _, j in ipairs(recipesToAddToFoundry) do
-		addRecipeToCategory(j, "crafting-with-fluid-or-metallurgy")
+		add_recipe_category(data.raw.recipe[j], "metallurgy")
 	end
 end
 
@@ -151,14 +130,8 @@ if mods["um-standalone-electromagnetic-plant"] then
 	}
 
 	for _, j in pairs(recipesToAddToEMP) do
-		addRecipeToCategory(j, "electromagnetics")
+		add_recipe_category(data.raw.recipe[j], "electromagnetics")
 	end
-
-	table.insert(
-		data.raw["assembling-machine"]["electromagnetic-plant"].crafting_categories,
-		"crafting-or-electromagnetics"
-	)
-	--adding crafting-or-electromagnetics to the em plant, the mod add it but.... doesn't no clue why
 end
 
 -- if the cryo mod is on give it the chem plants recipes
